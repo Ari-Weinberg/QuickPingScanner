@@ -38,14 +38,14 @@ def ping(ipAddr):
         if args.mac:
             macAddr = timeoutCommand(f"arp -n {ipAddr}", 1)
             if not len(macAddr.splitlines()) == 1:
-                outputText += '\t|  ' + macAddr.splitlines()[1].split()[2] + '  |  '
+                outputText += '\t|  ' + macAddr.splitlines()[1].split()[2]
             
 
         #if user requested hostname, try to resolve with netbios
         if args.hostname:
             hostName = timeoutCommand(f'nmblookup -A {ipAddr}', 1)
             if not hostName == '':
-                outputText += hostName.splitlines()[1].split()[0]
+                outputText += '\t|  ' + hostName.splitlines()[1].split()[0]
 
         upIps.append(outputText)
         Lock.release()
